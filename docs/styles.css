@@ -199,3 +199,28 @@ html[data-theme="dark"]{
   .wa-back{display:inline-block}
   .wa-bubble{max-width:86%}
 }
+
+/* Login + add-chat panels, chat states */
+#chatInterface [hidden]{display:none !important}
+.auth-card{max-width:440px;margin:22px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px;box-shadow:var(--shadow);text-align:left}
+.auth-card h3{margin:0 0 4px;font-size:1.25rem}
+.auth-sub{margin:0 0 16px;color:var(--muted);font-size:.94rem}
+.auth-tabs{display:flex;gap:8px;margin-bottom:16px}
+.auth-tab{flex:1;padding:10px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+.auth-tab.active{background:var(--brand-grad);color:#fff;border-color:transparent}
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form label{display:block;font-size:.85rem;font-weight:700;margin-bottom:5px}
+.auth-form input{width:100%;border:1px solid var(--border);border-radius:12px;padding:11px 14px;font:inherit;background:var(--surface);color:var(--text)}
+.auth-form input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.auth-error{margin:0;background:#fdecec;border:1px solid #f2b8b8;color:#8f1d1d;border-radius:10px;padding:9px 12px;font-size:.9rem}
+html[data-theme="dark"] .auth-error{background:#3a1d1d;border-color:#6e3535;color:#ffb4b4}
+.auth-submit{width:100%;cursor:pointer;font:inherit}
+.auth-actions{display:flex;gap:10px}
+.auth-actions .btn{flex:1;cursor:pointer;font:inherit;text-align:center}
+.auth-note{margin:14px 0 0;color:var(--muted);font-size:.85rem}
+.icon-btn{margin-left:auto;flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1.05rem;cursor:pointer;line-height:1}
+.icon-btn:hover{border-color:var(--brand)}
+.wa-me-meta{min-width:0}
+.wa-me-number{color:var(--muted);font-size:.76rem;line-height:1.2}
+.wa-pane-head .icon-btn{margin-left:auto}
+.wa-empty{margin:auto;max-width:340px;text-align:center;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:0 1px 2px rgba(0,0,0,.08)}

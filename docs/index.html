@@ -61,53 +61,104 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">ConnectX AI &middot; Chat</p>
-        <h2>Your chats, one tap away</h2>
-        <p class="section-sub">Tap the button and the ConnectX AI chat interface opens right here on this page — chat list, conversations and message box, in the familiar messaging-app style.</p>
+        <h2>Log in, then add a chat by mobile number</h2>
+        <p class="section-sub">Login is necessary to use chat. Tap the button, log in with your mobile number, then add a chat by entering the other person's mobile number.</p>
       </div>
       <div class="real-chat-box center">
         <button id="openChatBtn" class="btn btn-primary btn-big" type="button" data-open-chat>💬 Add Real Chat</button>
-        <p class="real-chat-note">Opens the chat interface on this page. No GitHub, no download needed to look around.</p>
+        <p class="real-chat-note">Opens the login and chat interface on this page.</p>
       </div>
 
       <div id="chatInterface" hidden>
-        <div class="wa-shell" id="waShell">
+
+        <!-- LOGIN (necessary before chat) -->
+        <div id="loginPanel" class="auth-card">
+          <h3>Log in to ConnectX AI</h3>
+          <p class="auth-sub">Login is necessary to use chat.</p>
+          <div class="auth-tabs" role="tablist">
+            <button type="button" id="tabLogin" class="auth-tab active">Log In</button>
+            <button type="button" id="tabCreate" class="auth-tab">Create Account</button>
+          </div>
+          <form id="authForm" class="auth-form">
+            <div id="nameField" hidden>
+              <label for="authName">Your name</label>
+              <input id="authName" type="text" placeholder="Your name" autocomplete="name" maxlength="60">
+            </div>
+            <div>
+              <label for="authMobile">Mobile number</label>
+              <input id="authMobile" type="tel" placeholder="e.g. 9876543210" autocomplete="tel" maxlength="16">
+            </div>
+            <div>
+              <label for="authPassword">Password</label>
+              <input id="authPassword" type="password" placeholder="Password" autocomplete="current-password" maxlength="64">
+            </div>
+            <p id="authError" class="auth-error" hidden></p>
+            <button class="btn btn-primary auth-submit" type="submit" id="authSubmit">Log In</button>
+          </form>
+          <p class="auth-note">New here? Tap “Create Account” first — it takes ten seconds.</p>
+        </div>
+
+        <!-- ADD CHAT BY MOBILE NUMBER -->
+        <div id="addChatPanel" class="auth-card" hidden>
+          <h3>Add a chat</h3>
+          <p class="auth-sub">Enter the person's mobile number to add their chat.</p>
+          <form id="addChatForm" class="auth-form">
+            <div>
+              <label for="addName">Name</label>
+              <input id="addName" type="text" placeholder="Person's name" maxlength="60">
+            </div>
+            <div>
+              <label for="addMobile">Mobile number</label>
+              <input id="addMobile" type="tel" placeholder="e.g. 9876543210" maxlength="16">
+            </div>
+            <p id="addError" class="auth-error" hidden></p>
+            <div class="auth-actions">
+              <button class="btn btn-primary" type="submit">Add Chat</button>
+              <button class="btn btn-ghost" type="button" id="addCancel">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- CHAT INTERFACE -->
+        <div class="wa-shell" id="waShell" hidden>
           <aside class="wa-list" aria-label="Chat list">
             <div class="wa-list-head">
-              <span class="wa-avatar wa-avatar-me" aria-hidden="true">CX</span>
-              <span class="wa-list-title">Chats</span>
-              <span class="sample-tag">SAMPLE</span>
+              <span class="wa-avatar wa-avatar-me" id="meAvatar" aria-hidden="true">?</span>
+              <div class="wa-me-meta">
+                <div class="wa-list-title" id="meName">Chats</div>
+                <div class="wa-me-number" id="meNumber"></div>
+              </div>
+              <button id="addChatBtn" class="icon-btn" type="button" title="Add a chat by mobile number" aria-label="Add a chat by mobile number">＋</button>
+              <button id="logoutBtn" class="icon-btn" type="button" title="Log out" aria-label="Log out">⏻</button>
             </div>
             <div class="wa-search">
               <label class="sr-only" for="waSearch">Search chats</label>
               <input id="waSearch" type="text" placeholder="Search chats…" autocomplete="off">
             </div>
             <div id="waChatList" class="wa-items"></div>
-            <p class="wa-list-foot">Sample chats, shown so you can try the interface.</p>
+            <p id="listEmpty" class="wa-list-foot">No chats yet. Tap ＋ to add a chat by mobile number.</p>
           </aside>
 
           <div class="wa-pane">
             <div class="wa-pane-head">
               <button id="waBack" class="wa-back" type="button" aria-label="Back to chat list">‹</button>
-              <span class="wa-avatar" id="waPaneAvatar" aria-hidden="true">P</span>
+              <span class="wa-avatar" id="waPaneAvatar" aria-hidden="true">?</span>
               <div class="wa-pane-meta">
-                <div class="wa-pane-name" id="waPaneName">Priya Sharma</div>
-                <div class="wa-pane-status" id="waPaneStatus">online</div>
+                <div class="wa-pane-name" id="waPaneName">No chat selected</div>
+                <div class="wa-pane-status" id="waPaneStatus">Add a chat by mobile number</div>
               </div>
-              <span class="sample-tag">SAMPLE</span>
+              <button id="deleteChatBtn" class="icon-btn" type="button" title="Delete this chat" aria-label="Delete this chat" hidden>🗑</button>
             </div>
             <div id="waMessages" class="wa-messages" aria-live="polite"></div>
-            <div id="waTyping" class="wa-typing" hidden>
-              <span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span id="waTypingText">typing…</span>
-            </div>
             <form id="waComposer" class="wa-composer">
               <label class="sr-only" for="waInput">Type a message</label>
-              <input id="waInput" type="text" placeholder="Type a message" autocomplete="off" maxlength="500">
+              <input id="waInput" type="text" placeholder="Type a message" autocomplete="off" maxlength="500" disabled>
               <button class="wa-send" type="submit" aria-label="Send message">➤</button>
             </form>
           </div>
         </div>
-        <p class="wa-note"><strong>Please note:</strong> this is the ConnectX AI chat interface running on this page — the chats are samples and anything you type stays in your browser. Real chatting between real accounts, with groups, calls and history saved, runs in the full app (steps in “How the full version works” below).</p>
+
+        <p class="wa-note"><strong>Please note:</strong> on this page, your login, chats and messages are saved only on this device, in your browser — messages do not reach the other person's phone from here. Real ConnectX AI accounts and chatting between phones run in the full app (steps in “How the full version works” below).</p>
       </div>
     </div>
   </section>
