@@ -16,7 +16,7 @@
       <span class="brand-text">ConnectX <em>AI</em></span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#real-chat">Real Chat</a>
+      <a href="#real-chat" data-open-chat>Real Chat</a>
       <a href="#features">Features</a>
       <a href="#about">About</a>
       <a href="#full-version">Full Version</a>
@@ -35,7 +35,7 @@
       <h1>ConnectX AI — Next-Generation Messaging</h1>
       <p class="hero-sub">Chat one-to-one or in groups, gather in communities, call with your voice or camera, and get a little writing help when you want it — all from one clean, fast, responsive app you can run yourself.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#real-chat">💬 Start Real Chat</a>
+        <a class="btn btn-primary" href="#real-chat" data-open-chat>💬 Start Real Chat</a>
         <a class="btn btn-ghost" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">View source on GitHub</a>
       </div>
 
@@ -58,15 +58,56 @@
 
   <!-- REAL CHAT -->
   <section id="real-chat" class="section">
-    <div class="wrap narrow center">
+    <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Real chat &middot; Full app</p>
-        <h2>Chat for real — in the full ConnectX AI app</h2>
-        <p class="section-sub">Real chatting means real accounts, groups, communities and calls between real people. That needs the ConnectX AI server running — a static page like this one cannot run a server, so real chat does not start on this page. The full app is free and its complete source code is in this GitHub repo.</p>
+        <p class="eyebrow">ConnectX AI &middot; Chat</p>
+        <h2>Your chats, one tap away</h2>
+        <p class="section-sub">Tap the button and the ConnectX AI chat interface opens right here on this page — chat list, conversations and message box, in the familiar messaging-app style.</p>
       </div>
-      <div class="real-chat-box">
-        <a class="btn btn-primary btn-big" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">💬 Add Real Chat — Get the Full App</a>
-        <p class="real-chat-note">Opens the GitHub repository. Download the code, run <code>npm install</code> then <code>npm start</code>, and real chat opens at <code>http://localhost:3000</code> — see the simple steps in <a href="#full-version">How the full version works</a> below.</p>
+      <div class="real-chat-box center">
+        <button id="openChatBtn" class="btn btn-primary btn-big" type="button" data-open-chat>💬 Add Real Chat</button>
+        <p class="real-chat-note">Opens the chat interface on this page. No GitHub, no download needed to look around.</p>
+      </div>
+
+      <div id="chatInterface" hidden>
+        <div class="wa-shell" id="waShell">
+          <aside class="wa-list" aria-label="Chat list">
+            <div class="wa-list-head">
+              <span class="wa-avatar wa-avatar-me" aria-hidden="true">CX</span>
+              <span class="wa-list-title">Chats</span>
+              <span class="sample-tag">SAMPLE</span>
+            </div>
+            <div class="wa-search">
+              <label class="sr-only" for="waSearch">Search chats</label>
+              <input id="waSearch" type="text" placeholder="Search chats…" autocomplete="off">
+            </div>
+            <div id="waChatList" class="wa-items"></div>
+            <p class="wa-list-foot">Sample chats, shown so you can try the interface.</p>
+          </aside>
+
+          <div class="wa-pane">
+            <div class="wa-pane-head">
+              <button id="waBack" class="wa-back" type="button" aria-label="Back to chat list">‹</button>
+              <span class="wa-avatar" id="waPaneAvatar" aria-hidden="true">P</span>
+              <div class="wa-pane-meta">
+                <div class="wa-pane-name" id="waPaneName">Priya Sharma</div>
+                <div class="wa-pane-status" id="waPaneStatus">online</div>
+              </div>
+              <span class="sample-tag">SAMPLE</span>
+            </div>
+            <div id="waMessages" class="wa-messages" aria-live="polite"></div>
+            <div id="waTyping" class="wa-typing" hidden>
+              <span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span id="waTypingText">typing…</span>
+            </div>
+            <form id="waComposer" class="wa-composer">
+              <label class="sr-only" for="waInput">Type a message</label>
+              <input id="waInput" type="text" placeholder="Type a message" autocomplete="off" maxlength="500">
+              <button class="wa-send" type="submit" aria-label="Send message">➤</button>
+            </form>
+          </div>
+        </div>
+        <p class="wa-note"><strong>Please note:</strong> this is the ConnectX AI chat interface running on this page — the chats are samples and anything you type stays in your browser. Real chatting between real accounts, with groups, calls and history saved, runs in the full app (steps in “How the full version works” below).</p>
       </div>
     </div>
   </section>

@@ -125,3 +125,77 @@ a{color:var(--brand)}
 .real-chat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 22px;box-shadow:var(--shadow)}
 .real-chat-note{color:var(--muted);margin:16px auto 0;max-width:560px;font-size:.96rem}
 .real-chat-note code{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:.88em}
+
+/* WhatsApp-style chat interface (ConnectX branding, generic messaging layout) */
+:root{
+  --wa-teal:#075e54; --wa-green:#25d366; --wa-head:#f0f2f5; --wa-bg:#ece5dd;
+  --wa-out:#dcf8c6; --wa-in:#ffffff; --wa-bar:#f0f0f0; --wa-tick:#53bdeb;
+}
+html[data-theme="dark"]{
+  --wa-head:#202c33; --wa-bg:#0b141a; --wa-out:#005c4b; --wa-in:#1f2c34; --wa-bar:#1f2c34;
+}
+@media (prefers-color-scheme:dark){
+  html:not([data-theme="light"]){
+    --wa-head:#202c33; --wa-bg:#0b141a; --wa-out:#005c4b; --wa-in:#1f2c34; --wa-bar:#1f2c34;
+  }
+}
+#chatInterface{margin-top:22px}
+#chatInterface[hidden]{display:none}
+.wa-shell{display:grid;grid-template-columns:320px 1fr;background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);height:600px;text-align:left}
+.wa-list{border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;min-height:0}
+.wa-list-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--wa-head);border-bottom:1px solid var(--border)}
+.wa-avatar{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--wa-teal);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem}
+.wa-avatar-me{background:var(--brand-grad)}
+.wa-list-title{font-weight:800;font-size:1.02rem}
+.wa-list-head .sample-tag{margin-left:auto}
+.wa-search{padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border)}
+.wa-search input{width:100%;border:1px solid var(--border);border-radius:999px;padding:8px 14px;font:inherit;font-size:.92rem;background:var(--surface-2);color:var(--text)}
+.wa-search input:focus{outline:2px solid var(--wa-teal);outline-offset:0}
+.wa-items{display:flex;flex-direction:column;overflow-y:auto}
+.wa-item{display:flex;gap:11px;align-items:center;width:100%;text-align:left;padding:11px 14px;border:0;border-bottom:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font:inherit}
+.wa-item:hover{background:var(--surface-2)}
+.wa-item.active{background:var(--surface-2)}
+.wa-item-text{min-width:0;flex:1}
+.wa-item-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.wa-item-name{font-weight:600;font-size:.97rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-item-time{color:var(--muted);font-size:.72rem;flex:0 0 auto}
+.wa-item-preview{display:block;color:var(--muted);font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-unread{background:var(--wa-green);color:#fff;font-size:.7rem;font-weight:800;border-radius:999px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.wa-list-foot{margin:auto 0 0;padding:12px 14px;color:var(--muted);font-size:.78rem}
+.wa-pane{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--wa-bg)}
+.wa-pane-head{display:flex;align-items:center;gap:11px;padding:8px 14px;background:var(--wa-head);border-bottom:1px solid var(--border)}
+.wa-back{display:none;border:0;background:transparent;color:var(--text);font-size:1.5rem;cursor:pointer;line-height:1;padding:2px 6px}
+.wa-pane-meta{min-width:0}
+.wa-pane-name{font-weight:700;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-pane-status{color:var(--muted);font-size:.78rem}
+.wa-pane-head .sample-tag{margin-left:auto}
+.wa-messages{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.wa-divider{align-self:center;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-weight:700;border-radius:8px;padding:3px 12px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.wa-row{display:flex}
+.wa-row.me{justify-content:flex-end}
+.wa-bubble{max-width:72%;padding:7px 10px 5px;border-radius:8px;background:var(--wa-in);box-shadow:0 1px 2px rgba(0,0,0,.13);position:relative}
+.wa-row.me .wa-bubble{background:var(--wa-out);border-top-right-radius:0}
+.wa-row:not(.me) .wa-bubble{border-top-left-radius:0}
+.wa-sender{font-size:.74rem;font-weight:800;color:var(--wa-teal);margin-bottom:1px}
+.wa-bubble p{margin:0;font-size:.95rem;line-height:1.45;color:var(--text)}
+.wa-meta{display:flex;gap:5px;align-items:center;justify-content:flex-end;margin-top:2px;font-size:.68rem;color:var(--muted)}
+.wa-ticks{color:var(--muted);font-weight:700;letter-spacing:-2px}
+.wa-ticks.read{color:var(--wa-tick)}
+.wa-typing{display:flex;gap:9px;align-items:center;padding:7px 18px;color:var(--muted);font-size:.85rem;background:var(--wa-bg)}
+.typing-dots{display:inline-flex;gap:4px}
+.typing-dots i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:waBlink 1.1s infinite}
+.typing-dots i:nth-child(2){animation-delay:.18s}
+.typing-dots i:nth-child(3){animation-delay:.36s}
+@keyframes waBlink{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}
+.wa-composer{display:flex;gap:10px;align-items:center;padding:9px 12px;background:var(--wa-bar);border-top:1px solid var(--border)}
+.wa-composer input{flex:1;border:1px solid var(--border);border-radius:999px;padding:11px 16px;font:inherit;background:var(--surface);color:var(--text);min-width:0}
+.wa-composer input:focus{outline:2px solid var(--wa-teal)}
+.wa-send{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:0;background:var(--wa-teal);color:#fff;font-size:1.05rem;cursor:pointer}
+.wa-note{margin:14px auto 0;max-width:760px;color:var(--muted);font-size:.9rem;text-align:center}
+@media (max-width:640px){
+  .wa-shell{grid-template-columns:1fr;height:560px}
+  .wa-shell.show-pane .wa-list{display:none}
+  .wa-shell:not(.show-pane) .wa-pane{display:none}
+  .wa-back{display:inline-block}
+  .wa-bubble{max-width:86%}
+}
