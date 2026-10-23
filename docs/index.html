@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConnectX AI — Next-Generation Messaging</title>
+<meta name="description" content="ConnectX AI is a modern messaging platform with real-time 1:1 and group chats, communities, 1:1 voice and video calls, and an optional local AI assistant. This page is a static showcase demo.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="ConnectX AI home">
+      <span class="brand-mark" aria-hidden="true">CX</span>
+      <span class="brand-text">ConnectX <em>AI</em></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#demo">Live Demo</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#full-version">Full Version</a>
+      <a href="#contact">Links</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark theme">🌙 Dark</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Open-source messaging platform &middot; Full source in this repo</p>
+      <h1>ConnectX AI — Next-Generation Messaging</h1>
+      <p class="hero-sub">Chat one-to-one or in groups, gather in communities, call with your voice or camera, and get a little writing help when you want it — all from one clean, fast, responsive app you can run yourself.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#demo">Try the in-browser demo</a>
+        <a class="btn btn-ghost" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">View source on GitHub</a>
+      </div>
+
+      <div class="stats-strip" role="list" aria-label="Honest facts about ConnectX AI">
+        <div class="stat" role="listitem"><strong>25</strong><span>end-to-end tests<br>on a real server</span></div>
+        <div class="stat" role="listitem"><strong>1:1 + Group</strong><span>chats, plus<br>communities &amp; channels</span></div>
+        <div class="stat" role="listitem"><strong>₹0</strong><span>free core —<br>no ads in chats</span></div>
+        <div class="stat" role="listitem"><strong>No E2E claim</strong><span>honest privacy —<br>E2E not in this version</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO NOTICE -->
+  <div class="wrap">
+    <div class="demo-notice" role="note">
+      <span class="demo-notice-badge">DEMO</span>
+      <p><strong>Static showcase:</strong> This GitHub Pages page is a static showcase demo. Real accounts, real-time messaging, calls and the database run only in the full server app — full source code is in this GitHub repo.</p>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE DEMO -->
+  <section id="demo" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Interactive demo &middot; Runs 100% in your browser</p>
+        <h2>Try the chat — right here</h2>
+        <p class="section-sub">Pick a sample conversation, type a message and press Send. You will see a typing indicator, delivery ticks and a local demo reply. Nothing you type leaves this page — there is no server behind this demo. Sample chats are labelled SAMPLE.</p>
+      </div>
+
+      <div class="chat-shell" id="chatShell">
+        <!-- Chat list -->
+        <aside class="chat-list" aria-label="Sample conversations">
+          <div class="chat-list-head">
+            <span class="chat-list-title">Chats</span>
+            <span class="demo-pill">DEMO</span>
+          </div>
+          <div id="chatList" class="chat-list-items"></div>
+          <p class="chat-list-foot">Sample data only. In the full app, this list is your real conversations, synced from the server.</p>
+        </aside>
+
+        <!-- Conversation pane -->
+        <div class="chat-pane">
+          <div class="chat-pane-head">
+            <button id="backToList" class="back-btn" type="button" aria-label="Back to chat list">‹</button>
+            <div class="avatar" id="paneAvatar" aria-hidden="true">P</div>
+            <div class="pane-head-text">
+              <div class="pane-name" id="paneName">Priya Sharma</div>
+              <div class="pane-status" id="paneStatus">online</div>
+            </div>
+            <span class="sample-tag">SAMPLE</span>
+          </div>
+
+          <div id="messageList" class="message-list" aria-live="polite"></div>
+
+          <div id="typingRow" class="typing-row" hidden>
+            <span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span id="typingText">typing…</span>
+          </div>
+
+          <form id="composer" class="composer">
+            <label class="sr-only" for="composerInput">Type a demo message</label>
+            <input id="composerInput" type="text" placeholder="Type a message…" autocomplete="off" maxlength="500">
+            <button class="send-btn" type="submit" aria-label="Send message">➤</button>
+          </form>
+          <p class="composer-hint">Tip: click any message to add a reaction. Demo replies are generated locally on this page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What the full app does</p>
+        <h2>Features</h2>
+        <p class="section-sub">Everything below is implemented in the full server app in this repository — described plainly, including what is not there yet.</p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">💬</div>
+          <h3>Real-Time Messaging</h3>
+          <p>1:1 and group messages delivered instantly over a live connection, with delivery and read receipts, typing indicators, replies, edits, reactions, pins, search, scheduled messages and disappearing messages.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">👥</div>
+          <h3>Groups &amp; Communities</h3>
+          <p>Groups with admin controls and invite links, temporary groups that archive themselves, and communities with multiple channels — including broadcast channels where only admins can post — plus built-in polls.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">📞</div>
+          <h3>Voice &amp; Video Calls (1:1 WebRTC)</h3>
+          <p>One-to-one voice and video calls in the browser, with mute controls, screen sharing where the browser supports it, and a call history. Group calls are <strong>not available</strong> in this version — the app says so instead of showing a fake button.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">✨</div>
+          <h3>AI Assistant</h3>
+          <p>An optional helper for writing — leave applications, meeting requests, introductions — plus common Hindi⇄English phrases and a “Summarize this chat” button that runs only when you press it in that chat. Private chats are never sent anywhere automatically.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🔒</div>
+          <h3>Privacy &amp; Security</h3>
+          <p>Hashed passwords, revocable device sessions, login rate limiting, blocking and reporting, and controls for who sees your photo and last-seen status. Honestly: E2E encryption is <strong>NOT implemented</strong> in this version — messages are protected in transit over HTTPS and stored on the server for multi-device sync.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">📎</div>
+          <h3>Files &amp; Media</h3>
+          <p>Share images, videos, documents and voice notes up to 25 MB, with type checks on the server. Downloads are restricted to people in that conversation, and a low-data mode stops images loading automatically.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="wrap narrow">
+      <div class="section-head left">
+        <p class="eyebrow">About</p>
+        <h2>One app you can actually run yourself</h2>
+      </div>
+      <p>ConnectX AI was built as a complete, working messaging platform — not a mock-up. It has a real backend, a real database, real sign-in with hashed passwords, and real-time delivery between separate accounts, all verified by an automated test suite that starts the actual server.</p>
+      <p>It was built in stages on purpose: first secure accounts and real-time one-to-one chat, then groups, media and communities, then one-to-one calls and the optional assistant. The design stays deliberately honest — a feature that is not finished is labelled as not available, never faked.</p>
+      <p>The core is free. The intended future revenue in the original plan is premium themes, business tools, advanced community management, extra storage and premium assistant features. Private message content is never sold, and chats are never used for advertising.</p>
+    </div>
+  </section>
+
+  <!-- FULL VERSION -->
+  <section id="full-version" class="section section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Run the real thing</p>
+        <h2>How the full version works</h2>
+        <p class="section-sub">This page cannot run accounts or a database — GitHub Pages only serves static files. The full app is a small Node.js server in this same repository. Running it takes two commands:</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <h3>Get the code</h3>
+          <p>Open the GitHub repository and download or clone it to your computer. You need Node.js 22.5 or newer.</p>
+          <code class="code-block">git clone https://github.com/wsdfghjk573nm-create/connectx-ai</code>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <h3>Install</h3>
+          <p>Install the small set of server dependencies. The database is created automatically on first run — there is no database server to set up.</p>
+          <code class="code-block">npm install</code>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <h3>Start</h3>
+          <p>Start the server, then open it in your browser. Create an account, and open a second browser or device to chat between two real accounts.</p>
+          <code class="code-block">npm start
+# then open http://localhost:3000</code>
+        </div>
+      </div>
+
+      <div class="honest-box">
+        <h3>Honest limits of the full version</h3>
+        <ul>
+          <li><strong>No E2E encryption in this version</strong> — protected in transit over HTTPS, stored server-side for sync. The app itself says this in its Privacy pages.</li>
+          <li><strong>Calls are 1:1 only</strong> — group calls are not available.</li>
+          <li><strong>No SMS / OTP and no push service</strong> — a phone number is a sign-in identifier with a password; notifications are in-app.</li>
+          <li><strong>Local database by default</strong> — a zero-setup embedded database for local and small use; a move to a larger database for production is documented in the README. No scale claims are made.</li>
+          <li><strong>The assistant is local by default</strong> — an optional external AI route exists behind a server key, is off by default, and is untested with a live key.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / LINKS -->
+  <section id="contact" class="section">
+    <div class="wrap narrow center">
+      <div class="section-head">
+        <p class="eyebrow">Get in touch</p>
+        <h2>Links</h2>
+        <p class="section-sub">The project lives on GitHub. Source code, setup instructions, the full README with honest limits, and issue reports are all there.</p>
+      </div>
+      <div class="link-cards">
+        <a class="link-card" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">
+          <strong>GitHub Repository</strong>
+          <span>github.com/wsdfghjk573nm-create/connectx-ai</span>
+          <span class="link-card-note">Full source code — server, app, tests and README.</span>
+        </a>
+        <a class="link-card" href="https://github.com/wsdfghjk573nm-create/connectx-ai/issues" target="_blank" rel="noopener">
+          <strong>Issues &amp; Feedback</strong>
+          <span>github.com/wsdfghjk573nm-create/connectx-ai/issues</span>
+          <span class="link-card-note">Report a bug or suggest a feature on GitHub.</span>
+        </a>
+      </div>
+      <p class="fine-print">This showcase page has no contact form and collects nothing — there is no server behind it.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>ConnectX AI — static showcase demo. The full app runs from the source code in the GitHub repo.</span>
+    <a href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">GitHub Repo</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
