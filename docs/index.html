@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ConnectX AI — Next-Generation Messaging</title>
-<meta name="description" content="ConnectX AI is a modern messaging platform with real-time 1:1 and group chats, communities, 1:1 voice and video calls, and an optional local AI assistant. This page is a static showcase demo.">
+<meta name="description" content="ConnectX AI is a modern messaging platform with real-time 1:1 and group chats, communities, 1:1 voice and video calls, and an optional local AI assistant. This page is a static showcase; real chat runs in the full app.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
       <span class="brand-text">ConnectX <em>AI</em></span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#demo">Live Demo</a>
+      <a href="#real-chat">Real Chat</a>
       <a href="#features">Features</a>
       <a href="#about">About</a>
       <a href="#full-version">Full Version</a>
@@ -35,7 +35,7 @@
       <h1>ConnectX AI — Next-Generation Messaging</h1>
       <p class="hero-sub">Chat one-to-one or in groups, gather in communities, call with your voice or camera, and get a little writing help when you want it — all from one clean, fast, responsive app you can run yourself.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#demo">Try the in-browser demo</a>
+        <a class="btn btn-primary" href="#real-chat">💬 Start Real Chat</a>
         <a class="btn btn-ghost" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">View source on GitHub</a>
       </div>
 
@@ -52,56 +52,21 @@
   <div class="wrap">
     <div class="demo-notice" role="note">
       <span class="demo-notice-badge">DEMO</span>
-      <p><strong>Static showcase:</strong> This GitHub Pages page is a static showcase demo. Real accounts, real-time messaging, calls and the database run only in the full server app — full source code is in this GitHub repo.</p>
+      <p><strong>Static showcase:</strong> This GitHub Pages page is a showcase page. Real accounts, real-time messaging, calls and the database run only in the full server app — full source code is in this GitHub repo.</p>
     </div>
   </div>
 
-  <!-- INTERACTIVE DEMO -->
-  <section id="demo" class="section">
-    <div class="wrap">
+  <!-- REAL CHAT -->
+  <section id="real-chat" class="section">
+    <div class="wrap narrow center">
       <div class="section-head">
-        <p class="eyebrow">Interactive demo &middot; Runs 100% in your browser</p>
-        <h2>Try the chat — right here</h2>
-        <p class="section-sub">Pick a sample conversation, type a message and press Send. You will see a typing indicator, delivery ticks and a local demo reply. Nothing you type leaves this page — there is no server behind this demo. Sample chats are labelled SAMPLE.</p>
+        <p class="eyebrow">Real chat &middot; Full app</p>
+        <h2>Chat for real — in the full ConnectX AI app</h2>
+        <p class="section-sub">Real chatting means real accounts, groups, communities and calls between real people. That needs the ConnectX AI server running — a static page like this one cannot run a server, so real chat does not start on this page. The full app is free and its complete source code is in this GitHub repo.</p>
       </div>
-
-      <div class="chat-shell" id="chatShell">
-        <!-- Chat list -->
-        <aside class="chat-list" aria-label="Sample conversations">
-          <div class="chat-list-head">
-            <span class="chat-list-title">Chats</span>
-            <span class="demo-pill">DEMO</span>
-          </div>
-          <div id="chatList" class="chat-list-items"></div>
-          <p class="chat-list-foot">Sample data only. In the full app, this list is your real conversations, synced from the server.</p>
-        </aside>
-
-        <!-- Conversation pane -->
-        <div class="chat-pane">
-          <div class="chat-pane-head">
-            <button id="backToList" class="back-btn" type="button" aria-label="Back to chat list">‹</button>
-            <div class="avatar" id="paneAvatar" aria-hidden="true">P</div>
-            <div class="pane-head-text">
-              <div class="pane-name" id="paneName">Priya Sharma</div>
-              <div class="pane-status" id="paneStatus">online</div>
-            </div>
-            <span class="sample-tag">SAMPLE</span>
-          </div>
-
-          <div id="messageList" class="message-list" aria-live="polite"></div>
-
-          <div id="typingRow" class="typing-row" hidden>
-            <span class="typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span id="typingText">typing…</span>
-          </div>
-
-          <form id="composer" class="composer">
-            <label class="sr-only" for="composerInput">Type a demo message</label>
-            <input id="composerInput" type="text" placeholder="Type a message…" autocomplete="off" maxlength="500">
-            <button class="send-btn" type="submit" aria-label="Send message">➤</button>
-          </form>
-          <p class="composer-hint">Tip: click any message to add a reaction. Demo replies are generated locally on this page.</p>
-        </div>
+      <div class="real-chat-box">
+        <a class="btn btn-primary btn-big" href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">💬 Add Real Chat — Get the Full App</a>
+        <p class="real-chat-note">Opens the GitHub repository. Download the code, run <code>npm install</code> then <code>npm start</code>, and real chat opens at <code>http://localhost:3000</code> — see the simple steps in <a href="#full-version">How the full version works</a> below.</p>
       </div>
     </div>
   </section>
@@ -240,7 +205,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <span>ConnectX AI — static showcase demo. The full app runs from the source code in the GitHub repo.</span>
+    <span>ConnectX AI — static showcase page. The full app runs from the source code in the GitHub repo.</span>
     <a href="https://github.com/wsdfghjk573nm-create/connectx-ai" target="_blank" rel="noopener">GitHub Repo</a>
   </div>
 </footer>
