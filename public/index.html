@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConnectX AI — Next-Generation Messaging</title>
+<meta name="description" content="ConnectX AI: real-time messaging, groups, communities, 1:1 voice & video calls, polls, scheduled messages and a privacy-first built-in AI assistant.">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<!-- ===================== LANDING / AUTH ===================== -->
+<div id="landingView">
+  <header class="landing-head">
+    <div class="logo">💬 ConnectX <span>AI</span></div>
+    <div>
+      <button class="btn ghost" id="landingThemeBtn" title="Toggle light/dark mode">🌙</button>
+      <button class="btn ghost" data-show-auth="login">Log in</button>
+      <button class="btn primary" data-show-auth="register">Sign up free</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Messaging that respects <em>your</em> time — and your privacy.</h1>
+    <p class="hero-sub">Real-time chats, groups & communities, 1:1 voice and video calls, polls, scheduled and disappearing messages — plus a built-in AI assistant that never reads your private conversations.</p>
+    <button class="btn primary big" data-show-auth="register">Create your free account</button>
+    <p class="hero-note">Core messaging is free. We never sell message content or use private chats for advertising.</p>
+  </section>
+
+  <section class="features">
+    <div class="feature"><h3>⚡ Real-time everything</h3><p>Instant delivery, typing indicators, read receipts — synced across your devices.</p></div>
+    <div class="feature"><h3>👥 Groups & Communities</h3><p>Admin-controlled groups, invite links, temporary groups, multi-channel communities and broadcast channels.</p></div>
+    <div class="feature"><h3>📞 Voice & video calls</h3><p>1-to-1 WebRTC calls with screen sharing where your browser supports it.</p></div>
+    <div class="feature"><h3>🤖 AI assistant, on your terms</h3><p>Summarize a chat only when you tap the button. Writing help and translations run locally by default.</p></div>
+    <div class="feature"><h3>🎯 Focus Mode & Smart Inbox</h3><p>Silence selected chats until you choose, and sort conversations into Personal, Work, Family and Community.</p></div>
+    <div class="feature"><h3>⏰ Smart messaging</h3><p>Schedule messages for later, set disappearing-message timers, pin, star, react and search everything.</p></div>
+  </section>
+
+  <section class="auth-card" id="authCard">
+    <div class="auth-tabs">
+      <button id="tabLogin" class="active">Log in</button>
+      <button id="tabRegister">Sign up</button>
+    </div>
+    <form id="loginForm">
+      <label>Email or phone number<input name="identifier" required autocomplete="username" placeholder="you@example.com or +91…"></label>
+      <label>Password<input name="password" type="password" required autocomplete="current-password"></label>
+      <button class="btn primary wide" type="submit">Log in</button>
+      <p class="auth-msg" id="loginMsg"></p>
+      <p class="small"><a href="#" id="forgotLink">Forgot password?</a></p>
+    </form>
+    <form id="forgotForm" class="hidden">
+      <label>Email or phone number<input name="identifier" required></label>
+      <button class="btn wide" type="submit">Generate reset token</button>
+      <p class="auth-msg" id="forgotMsg"></p>
+      <div id="resetBox" class="hidden">
+        <label>Reset token (dev mode — normally emailed)<input name="token"></label>
+        <label>New password<input name="newPassword" type="password"></label>
+        <button class="btn primary wide" id="resetBtn" type="button">Set new password</button>
+        <p class="auth-msg" id="resetMsg"></p>
+      </div>
+      <p class="small"><a href="#" id="backToLogin">Back to login</a></p>
+    </form>
+    <form id="registerForm" class="hidden">
+      <label>Your name<input name="name" required maxlength="80" placeholder="Full name"></label>
+      <label>Email or phone number<input name="identifier" required placeholder="you@example.com or +91…"></label>
+      <label>Password (min 6 characters)<input name="password" type="password" required minlength="6" autocomplete="new-password"></label>
+      <button class="btn primary wide" type="submit">Create account</button>
+      <p class="auth-msg" id="registerMsg"></p>
+      <p class="small muted">Phone-number verification by SMS is <b>not enabled in this build</b> — your phone number works as a login identifier with your password. Email verification is likewise not sent (no mail server configured).</p>
+    </form>
+  </section>
+
+  <footer class="landing-foot">
+    <a href="#" data-legal="terms">Terms of Service</a> · <a href="#" data-legal="privacy">Privacy Policy</a>
+    <p class="small muted">ConnectX AI — an original messaging platform. Messages are protected in transit when served over HTTPS. End-to-end encryption is <b>not</b> implemented in this version.</p>
+  </footer>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="appView" class="hidden">
+  <nav id="rail">
+    <div class="logo small-logo">💬</div>
+    <button class="rail-btn active" data-nav="chats" title="Chats">💬<span>Chats</span></button>
+    <button class="rail-btn" data-nav="communities" title="Communities">🏠<span>Groups</span></button>
+    <button class="rail-btn" data-nav="discover" title="Discover people">🔍<span>Find</span></button>
+    <button class="rail-btn" data-nav="assistant" title="AI Assistant">🤖<span>AI</span></button>
+    <button class="rail-btn" data-nav="calls" title="Call history">📞<span>Calls</span></button>
+    <button class="rail-btn" data-nav="notifications" title="Notifications">🔔<span>Alerts</span><b class="badge hidden" id="notifBadge">0</b></button>
+    <button class="rail-btn" data-nav="settings" title="Profile & settings">⚙️<span>Settings</span></button>
+    <button class="rail-avatar" id="railAvatar" title="My profile">?</button>
+  </nav>
+
+  <!-- list column -->
+  <aside id="listPanel">
+    <!-- chats list -->
+    <section class="list-view" id="view-chats">
+      <div class="list-head">
+        <h2>Chats</h2>
+        <div>
+          <button class="icon-btn" id="newGroupBtn" title="New group">👥+</button>
+          <button class="icon-btn" id="starredBtn" title="Starred messages">⭐</button>
+        </div>
+      </div>
+      <input class="search-box" id="chatSearch" placeholder="Search chats or messages…">
+      <div class="inbox-tabs" id="inboxTabs">
+        <button class="chip active" data-cat="All">All</button>
+        <button class="chip" data-cat="Personal">Personal</button>
+        <button class="chip" data-cat="Work">Work</button>
+        <button class="chip" data-cat="Family">Family</button>
+        <button class="chip" data-cat="Community">Community</button>
+      </div>
+      <div class="conv-list" id="convList"></div>
+    </section>
+
+    <!-- communities -->
+    <section class="list-view hidden" id="view-communities">
+      <div class="list-head"><h2>Communities</h2><button class="icon-btn" id="newCommunityBtn" title="New community">＋</button></div>
+      <div class="conv-list" id="communityList"></div>
+    </section>
+
+    <!-- discover -->
+    <section class="list-view hidden" id="view-discover">
+      <div class="list-head"><h2>Discover people</h2></div>
+      <input class="search-box" id="userSearch" placeholder="Search by name, email or phone…">
+      <div class="conv-list" id="userResults"></div>
+      <h3 class="sub-head">Blocked users</h3>
+      <div class="conv-list" id="blockList"></div>
+    </section>
+
+    <!-- assistant -->
+    <section class="list-view hidden" id="view-assistant">
+      <div class="list-head"><h2>AI Assistant</h2></div>
+      <p class="small muted pad">Built-in assistant — runs locally. It never sees your private chats. Use “✨ Summarize” inside a conversation to summarize that chat, only when you ask.</p>
+      <div class="conv-list" id="assistantHints">
+        <div class="hint">Try: “write a leave application”</div>
+        <div class="hint">Try: “translate: good morning”</div>
+        <div class="hint">Try: “how do I create a group?”</div>
+        <div class="hint">Try: “suggest replies”</div>
+      </div>
+    </section>
+
+    <!-- calls -->
+    <section class="list-view hidden" id="view-calls">
+      <div class="list-head"><h2>Call history</h2></div>
+      <div class="conv-list" id="callList"></div>
+    </section>
+
+    <!-- notifications -->
+    <section class="list-view hidden" id="view-notifications">
+      <div class="list-head"><h2>Notifications</h2><button class="icon-btn" id="notifReadAll" title="Mark all read">✓✓</button></div>
+      <div class="conv-list" id="notifList"></div>
+    </section>
+
+    <!-- settings -->
+    <section class="list-view hidden" id="view-settings">
+      <div class="list-head"><h2>Settings</h2></div>
+      <div class="settings-body">
+        <div class="profile-card">
+          <div class="avatar big" id="profileAvatar">?</div>
+          <div>
+            <div class="pname" id="profileName">—</div>
+            <div class="small muted" id="profileIdentifier">—</div>
+          </div>
+        </div>
+        <label>Change photo<input type="file" id="avatarInput" accept="image/*"></label>
+        <label>Display name<input id="editName"></label>
+        <label>Bio<input id="editBio" maxlength="300" placeholder="A short bio"></label>
+        <button class="btn primary wide" id="saveProfileBtn">Save profile</button>
+        <hr>
+        <h3>Appearance</h3>
+        <label class="row-between">Theme
+          <select id="themeSelect"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+        <label class="row-between">Low-data mode <span class="small muted">(don't auto-load images)</span>
+          <input type="checkbox" id="lowDataToggle"></label>
+        <hr>
+        <h3>Privacy & Security</h3>
+        <label class="row-between">Profile photo visible to
+          <select id="photoVis"><option value="everyone">Everyone</option><option value="nobody">Nobody</option></select></label>
+        <label class="row-between">Last seen & online status
+          <select id="lastSeenVis"><option value="everyone">Everyone</option><option value="nobody">Nobody</option></select></label>
+        <p class="small muted">🔒 Honest privacy note: messages are protected in transit when this site is served over HTTPS and are stored on the server. <b>End-to-end encryption is NOT implemented in this version</b> — do not treat chats as end-to-end encrypted.</p>
+        <button class="btn wide" id="sessionsBtn">Devices & sessions</button>
+        <div id="sessionList"></div>
+        <hr>
+        <h3>Password</h3>
+        <label>Current password<input type="password" id="curPass"></label>
+        <label>New password<input type="password" id="newPass"></label>
+        <button class="btn wide" id="changePassBtn">Change password</button>
+        <hr>
+        <h3>Account</h3>
+        <button class="btn wide" id="exportBtn">⬇ Export my data (JSON)</button>
+        <button class="btn wide" id="helpBtn">Help & support</button>
+        <button class="btn wide" data-legal="terms">Terms of Service</button>
+        <button class="btn wide" data-legal="privacy">Privacy Policy</button>
+        <button class="btn wide danger" id="logoutBtn">Log out</button>
+        <button class="btn wide danger" id="deleteAccountBtn">Delete my account</button>
+        <p class="auth-msg" id="settingsMsg"></p>
+      </div>
+    </section>
+  </aside>
+
+  <!-- main column -->
+  <main id="mainPanel">
+    <div id="emptyState">
+      <div class="empty-art">💬</div>
+      <h2>Welcome to ConnectX AI</h2>
+      <p>Pick a conversation, or find someone in Discover to start chatting.</p>
+    </div>
+
+    <!-- conversation -->
+    <section id="chatView" class="hidden">
+      <header id="chatHeader">
+        <button class="icon-btn mobile-only" id="backBtn">←</button>
+        <div class="avatar" id="chatAvatar">?</div>
+        <div class="chat-title">
+          <div id="chatName">—</div>
+          <div class="small muted" id="chatStatus">—</div>
+        </div>
+        <div class="chat-actions">
+          <button class="icon-btn" id="voiceCallBtn" title="Voice call (1-to-1)">📞</button>
+          <button class="icon-btn" id="videoCallBtn" title="Video call (1-to-1)">🎥</button>
+          <button class="icon-btn" id="summarizeBtn" title="Summarize this chat (AI, on request only)">✨</button>
+          <button class="icon-btn" id="chatSearchBtn" title="Search in this chat">🔍</button>
+          <button class="icon-btn" id="chatMenuBtn" title="Chat settings">⋮</button>
+        </div>
+      </header>
+      <div id="chatSearchBar" class="hidden">
+        <input id="inChatSearch" placeholder="Search messages in this chat…">
+        <button class="icon-btn" id="closeChatSearch">✕</button>
+      </div>
+      <div id="pinBar" class="hidden"></div>
+      <div id="msgArea"></div>
+      <div id="typingBar" class="hidden"></div>
+      <div id="replyBar" class="hidden"><span id="replyText"></span><button class="icon-btn" id="cancelReply">✕</button></div>
+      <div id="composer">
+        <button class="icon-btn" id="attachBtn" title="Attach image, video, document or voice note">📎</button>
+        <input type="file" id="fileInput" class="hidden" accept="image/*,video/*,audio/*,.pdf,.txt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip">
+        <button class="icon-btn" id="voiceBtn" title="Record a voice message">🎤</button>
+        <textarea id="msgInput" rows="1" placeholder="Type a message…"></textarea>
+        <button class="icon-btn" id="scheduleBtn" title="Schedule message for later">⏰</button>
+        <button class="btn primary" id="sendBtn">Send</button>
+      </div>
+      <div id="recordBar" class="hidden">🔴 Recording… <button class="btn" id="stopRecordBtn">Stop & send</button> <button class="btn ghost" id="cancelRecordBtn">Cancel</button></div>
+    </section>
+
+    <!-- community detail -->
+    <section id="communityView" class="hidden">
+      <header id="chatHeader2">
+        <button class="icon-btn mobile-only" id="backBtn2">←</button>
+        <div class="chat-title"><div id="communityName">—</div><div class="small muted" id="communityMeta">—</div></div>
+        <button class="btn" id="joinCommunityBtn">Join</button>
+      </header>
+      <div class="community-body">
+        <p id="communityDesc"></p>
+        <h3>Channels</h3>
+        <div id="channelList"></div>
+        <button class="btn wide hidden" id="newChannelBtn">+ New channel (admins)</button>
+        <h3>Members</h3>
+        <div id="memberList"></div>
+      </div>
+    </section>
+
+    <!-- assistant chat -->
+    <section id="assistantView" class="hidden">
+      <header class="simple-head"><button class="icon-btn mobile-only" id="backBtn3">←</button><h2>🤖 ConnectX Assistant</h2></header>
+      <div id="assistantMsgs" class="assistant-msgs"></div>
+      <div id="composer">
+        <textarea id="assistantInput" rows="1" placeholder="Ask the assistant…"></textarea>
+        <button class="btn primary" id="assistantSend">Ask</button>
+      </div>
+    </section>
+
+    <!-- generic content view (help/legal/starred) -->
+    <section id="contentView" class="hidden">
+      <header class="simple-head"><button class="icon-btn mobile-only" id="backBtn4">←</button><h2 id="contentTitle">—</h2></header>
+      <div id="contentBody" class="content-body"></div>
+    </section>
+  </main>
+</div>
+
+<!-- ===================== MODALS ===================== -->
+<div id="modalBackdrop" class="hidden">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<!-- incoming call -->
+<div id="incomingCall" class="hidden">
+  <div class="incoming-card">
+    <div class="avatar big" id="incomingAvatar">?</div>
+    <div id="incomingText">Incoming call…</div>
+    <div class="incoming-actions">
+      <button class="btn danger" id="declineCallBtn">Decline</button>
+      <button class="btn primary" id="acceptCallBtn">Accept</button>
+    </div>
+  </div>
+</div>
+
+<!-- call overlay -->
+<div id="callOverlay" class="hidden">
+  <video id="remoteVideo" autoplay playsinline></video>
+  <video id="localVideo" autoplay playsinline muted></video>
+  <div class="call-top">
+    <div id="callName">—</div>
+    <div id="callState" class="small">Calling…</div>
+    <div id="callQuality" class="small muted">Connection quality: basic indicator (signaling state only)</div>
+  </div>
+  <div class="call-controls">
+    <button class="call-btn" id="muteMicBtn" title="Mute microphone">🎤</button>
+    <button class="call-btn" id="muteCamBtn" title="Turn camera off">🎥</button>
+    <button class="call-btn" id="speakerBtn" title="Speaker">🔊</button>
+    <button class="call-btn" id="shareScreenBtn" title="Share screen">🖥️</button>
+    <button class="call-btn end" id="endCallBtn" title="End call">📞</button>
+  </div>
+</div>
+
+<div id="toast" class="hidden"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
